@@ -42,6 +42,7 @@ Find the file `index.js` and complete the tasks until your tests are passing.
 Edit the `ReadMe` file with your answers.
 
 1. In your own words, define closure (1-2 sentences).
+-Closure gives us the ability to put together functions. It's code that's been identified elsewhere.
 2. Study the following code, then answer the questions below.
 
 ```js
@@ -63,8 +64,12 @@ dansRoll();
 ```
 
 a. Where is closure used in this code? How can you tell?
+
+-Closure is used within function (name and newRoll to get the answer).
 b. Compare and contrast calling `dansRoll` the first and second time. What is always the same? What could change?
+-The name is always the same bc it's a const variable. The 'roll' changes bc it's set to random.
 c. What is the lexical scope of `newRoll`? 
+-newRoll's lexical scope is within personalDice (that's where it belongs)
 
 ### Task 3 - Stretch Goals
 
