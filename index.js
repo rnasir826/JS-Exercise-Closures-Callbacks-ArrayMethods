@@ -59,15 +59,14 @@ function counter2() {
 Write a function called `inning` that generates a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
 
 function inning() {
-    let newInning = Math.floor(Math.random() * 2);
-    console.log(`The team scored ${newInning}`);
-
-    return function() {
-
-    }
+    return Math.floor(Math.random() * Math.floor(3));
 }
+// let newInning = Math.floor(Math.random() * 3);
+// console.log(`The team scored ${newInning}`);
+// return newInning
+console.log('Task 2', inning());
 
-inning();
+
 
 /* Task 3: finalScore()
 
@@ -81,17 +80,26 @@ finalScore(inning, 9) might return:
   "Away": 5,
 }
 */
-let gameOne = 'Home'
-let gameTwo = 'Away'
+// Baseball
+//  Each inning, each team has the oportunity to score. 
+//  Each team has it's own socre for each inning. 
+//  A game has nine innings
 
-function finalScore(inningNum, callback) {
-    let finalInning = Math.floor(Math.random() * 2);
-    let lastInning = Math.floor(Math.random() * 2);
-    console.log(`${gameOne} game scored ${finalInning}`);
-    console.log(`${gameTwo} game scored ${lastInning}`);
-    return finalScore
+function finalScore(inningCB, inningsNum) {
+
+    let homeScore = 0;
+    let awayScore = 0;
+    for (let i = 0; i < inningsNum; i++) {
+        homeScore = homeScore + inningCB();
+        awayScore = awayScore + inningCB();
+    }
+    return {
+        Home: homeScore,
+        Away: awayScore
+    }
 }
-finalScore('inning', 9)
+console.log('Task 3:', finalScore(inning, 9));
+
 
 
 /* Task 4: 
@@ -115,7 +123,32 @@ and returns the score at each pont in the game, like so:
 9th inning: awayTeam - homeTeam
 
 Final Score: awayTeam - homeTeam */
+function getInningScore(inningCB) {
+    return {
+        Home: inningCB();
+        Away: inningCB();
+    }
+}
 
-function scoreboard(getInningScore, inning, inningNum) {
+function scoreboard(getInningScoreCB, inningCB, inningsNum) {
+    const scoreByInning = [];
 
-} // return number of innings
+    let homeScore = 0;
+    let awayScore = 0;
+
+    for (let i = 0; i < getInningScoreCB; i++) {
+        const currentInning = getInningScoreCB(inningCB);
+        homeScore = homeScore + currentInning.Home
+        awayScore = awayScore + currentInning.Away
+        scoreByInning.push(`Inning ${i+1}: Away: ${currentInning.Away} - Home: ${currentInning.Home}`);
+    }
+    if (homeScore === awayScore) {
+        scoreByInning.push(`you will need to play another inning`);
+    } else {
+        scoreByInning.push(`Final Scores are : Away: ${awayScore} - ${homeScore}`)
+    }
+    return scoreByInning;
+}
+console.log(`Task 4:`, scoreboard(getInningScore, inning, 9));
+
+scoreboard(inning, 9);
